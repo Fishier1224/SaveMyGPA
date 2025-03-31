@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GPA Calculator</title>
+</head>
+<body>
+    <h1>Enter Your Course Info</h1>
+
+    <form id="gpa-form">
+        <label>Current GPA: <input type="number" step="0.001" id="current_gpa" required></label><br><br>
+        <label>Current Units: <input type="number" id="current_units" required></label><br><br>
+        <label>Desired GPA: <input type="number" step="0.01" id="desired_gpa" required></label><br><br>
+        <label>Max Future Units: <input type="number" id="max_future_units" required></label><br><br>
+        <label>Grade Points for A (default 4.0): <input type="number" step="0.1" id="college_A" value="4.0"></label><br><br>
+        <label>Grade Points for A− (default 3.7): <input type="number" step="0.1" id="college_A_minus" value="3.7"></label><br><br>
+        
+        <button type="submit">Calculate GPA</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("gpa-form").onsubmit = async function(e) {
+            e.preventDefault();
+
+            const data = {
+                current_gpa: parseFloat(document.getElementById("current_gpa").value),
+                current_units: parseInt(document.getElementById("current_units").value),
+                desired_gpa: parseFloat(document.getElementById("desired_gpa").value),
+                max_future_units: parseInt(document.getElementById("max_future_units").value),
+                college_A: parseFloat(document.getElementById("college_A").value),
+                college_A_minus: parseFloat(document.getElementById("college_A_minus").value)
+            };
+
+            const response = await fetch("/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            const html = await response.text();
+            document.getElementById("result").innerHTML = html;
+        };
+    </script>
+</body>
+</html>
