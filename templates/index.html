@@ -1,20 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GPA Calculator</title>
+    <title>Save Your GPA</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: cyan;
+            font-weight: bold;
+            margin-bottom: 0.1em;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: yellowgreen;
+            margin-top: 0.2em;
+            margin-bottom: 1.5em;
+        }
+
+        .small {
+            font-size: 0.9em;
+            font-weight: normal;
+            color: white;
+            margin-bottom: 2em;
+        }
+
+        label, input {
+            display: block;
+            margin: 10px auto;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 50%;
+            color: white;
+        }
+
+        table, th, td {
+            border: 1px solid white;
+            padding: 8px;
+        }
+
+        #result .subtitle {
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Enter Your Course Info</h1>
+    <h1>SAVE YOUR GPA</h1>
+    <div class="small">with A and A-</div>
+    <div class="small">by Athena Mo</div>
+    <div class="subtitle">Enter Your Course Info</div>
 
     <form id="gpa-form">
-        <label>Current GPA: <input type="number" step="0.001" id="current_gpa" required></label><br><br>
-        <label>Current Units: <input type="number" id="current_units" required></label><br><br>
-        <label>Desired GPA: <input type="number" step="0.01" id="desired_gpa" required></label><br><br>
-        <label>Max Future Units: <input type="number" id="max_future_units" required></label><br><br>
-        <label>Grade Points for A (default 4.0): <input type="number" step="0.1" id="college_A" value="4.0"></label><br><br>
-        <label>Grade Points for A− (default 3.7): <input type="number" step="0.1" id="college_A_minus" value="3.7"></label><br><br>
+        <label>Current GPA: <input type="number" step="0.001" id="current_gpa" required></label>
+        <label>Completed Units: <input type="number" id="current_units" required></label>
+        <label>Desired GPA: <input type="number" step="0.01" id="desired_gpa" required></label>
+        <label>Future Units: <input type="number" id="max_future_units" required></label>
+        <label>Grade Points for A (default 4.0): <input type="number" step="0.1" id="college_A" value="4.0"></label>
+        <label>Grade Points for A− (default 3.7): <input type="number" step="0.1" id="college_A_minus" value="3.7"></label>
         
-        <button type="submit">Calculate GPA</button>
+        <button type="submit">View Your Plan</button>
     </form>
 
     <div id="result"></div>
@@ -39,7 +109,10 @@
             });
 
             const html = await response.text();
-            document.getElementById("result").innerHTML = html;
+            document.getElementById("result").innerHTML = `
+                <div class="subtitle">good luck!!</div>
+                ${html}
+            `;
         };
     </script>
 </body>
