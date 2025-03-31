@@ -22,8 +22,15 @@
         .subtitle {
             font-size: 1.5em;
             font-weight: bold;
+            color: white;
+            margin-top: 0.5em;
+            margin-bottom: 1.5em;
+        }
+        .subtitleextra {
+            font-size: 1.5em;
+            font-weight: bold;
             color: yellowgreen;
-            margin-top: 0.2em;
+            margin-top: 0.5em;
             margin-bottom: 1.5em;
         }
 
@@ -31,32 +38,73 @@
             font-size: 0.9em;
             font-weight: normal;
             color: white;
-            margin-bottom: 2em;
+            margin-bottom: 1em;
         }
 
-        label, input {
-            display: block;
-            margin: 10px auto;
+        .smallsb {
+            font-size: 0.9em;
+            font-weight: normal;
+            color: cyan;
+            margin-bottom: 0.5em;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
             font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        labelextra {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: yellowgreen;
         }
 
         input {
-            padding: 5px;
+            padding: 8px;
             font-size: 1em;
+            width: 180px;
+            text-align: center;
         }
 
         button {
             margin-top: 20px;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 1em;
             font-weight: bold;
+            background-color: cyan;
+            color: black;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00cccc;
         }
 
         table {
             margin: 20px auto;
             border-collapse: collapse;
-            width: 50%;
+            width: 60%;
             color: white;
         }
 
@@ -72,18 +120,43 @@
 </head>
 <body>
     <h1>SAVE YOUR GPA</h1>
-    <div class="small">with A and A-</div>
+    <div class="smallsb">with A and A-</div>
     <div class="small">by Athena Mo</div>
-    <div class="subtitle">Enter Your Course Info</div>
+    <br>
+    <br>
+    <div class="subtitle">Enter Your Info</div>
 
     <form id="gpa-form">
-        <label>Current GPA: <input type="number" step="0.001" id="current_gpa" required></label>
-        <label>Completed Units: <input type="number" id="current_units" required></label>
-        <label>Desired GPA: <input type="number" step="0.01" id="desired_gpa" required></label>
-        <label>Future Units: <input type="number" id="max_future_units" required></label>
-        <label>Grade Points for A (default 4.0): <input type="number" step="0.1" id="college_A" value="4.0"></label>
-        <label>Grade Points for A− (default 3.7): <input type="number" step="0.1" id="college_A_minus" value="3.7"></label>
-        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="current_gpa">Current GPA</label>
+                <input type="number" step="0.001" id="current_gpa" required>
+            </div>
+            <div class="form-group">
+                <label for="current_units">Completed Units</label>
+                <input type="number" id="current_units" required>
+            </div>
+            <div class="form-group">
+                <labelextra for="desired_gpa">Desired GPA</labelextra>
+                <input type="number" step="0.01" id="desired_gpa" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="max_future_units">Future Units</label>
+                <input type="number" id="max_future_units" required>
+            </div>
+            <div class="form-group">
+                <label for="college_A">Grade Points for A</label>
+                <input type="number" step="0.1" id="college_A" value="4.0">
+            </div>
+            <div class="form-group">
+                <label for="college_A_minus">Grade Points for A−</label>
+                <input type="number" step="0.1" id="college_A_minus" value="3.7">
+            </div>
+        </div>
+
         <button type="submit">View Your Plan</button>
     </form>
 
@@ -110,7 +183,8 @@
 
             const html = await response.text();
             document.getElementById("result").innerHTML = `
-                <div class="subtitle">good luck!!</div>
+                <img src="/static/rooting.png" alt="rooting" style="max-width: 200px; margin-top: 30px;" />
+                <div class="subtitleextra">good luck!</div>
                 ${html}
             `;
         };
